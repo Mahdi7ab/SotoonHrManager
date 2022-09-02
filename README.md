@@ -2,6 +2,15 @@
 
 Sotoon Human Resource Manager
 
+# Create Virtual Envioroment
+
+python3 -m venv .venv
+.venv\scripts\active
+
+# Run
+
+python manage.py runserver
+
 # Migrate Group and initial Users
 
 Functions in => dashboard\migrate.py
