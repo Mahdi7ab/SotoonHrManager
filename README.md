@@ -13,8 +13,8 @@ python manage.py runserver
 
 # Migrate Group and initial Users
 
-Functions in => dashboard\migrate.py
-Run One in => hr_manager\urls.py
+Functions in => dashboard\migrate.py \n
+Run Once in => hr_manager\urls.py
 
 # superuser
 
