@@ -1,62 +1,45 @@
 # SotoonHrManager
 
 Sotoon Human Resource Manager.  
-My First Project
+My First Project (python & django)
 
-# Create Virtual Envioroment
+## Create Virtual Envioroment
 
 py -3 -m venv .venv  
 .venv\Scripts\activate  
 pip install -r .\requirements.txt
 
-# Run
+## Run
 
 python manage.py runserver
 
-# RESTful Api (django restframeword)
-
-## url
+## RESTful Api (django restframeword)
 
 http://127.0.0.1:8000/employee_api
 
-# Migrate Group and initial Users
+## Migrate Group and initial Users
 
-## Functions
+### Functions
 
 dashboard\migrate.py
 
-## Run Once
+### Run Once
 
 hr_manager\urls.py
 
-# Users
+## Users
 
 ## superuser (admin)
 
-### username
-
-mahdi7ab
-
-### password
-
+mahdi7ab  
 P@ss23??
 
 ## HrManager
 
-### username
-
-HrManager
-
-### password
-
+HrManager  
 P@ss23??
 
 ## PayrollManager
 
-### username
-
-PayrollManager
-
-### password
-
+PayrollManager  
 P@ss23??
