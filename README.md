@@ -1,11 +1,12 @@
 # SotoonHrManager
 
-Sotoon Human Resource Manager
+Sotoon Human Resource Manager.  
+My First Project
 
 # Create Virtual Envioroment
 
-py -3 -m venv .venv
-.venv\Scripts\activate
+py -3 -m venv .venv  
+.venv\Scripts\activate  
 pip install -r .\requirements.txt
 
 # Run
@@ -22,7 +23,7 @@ http://127.0.0.1:8000/employee_api
 
 ## Functions
 
-dashboard\migrate.py \\n
+dashboard\migrate.py
 
 ## Run Once
 
