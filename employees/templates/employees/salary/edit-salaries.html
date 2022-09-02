@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Page Title</title>
+    <title>Edit Salaries</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
@@ -41,8 +41,8 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/login/"
-                >Login</a
+              <a class="nav-link active" aria-current="page" href="/logout/"
+                >Logout</a
               >
             </li>
           </ul>
@@ -51,18 +51,19 @@
     </nav>
     <div class="container">
       <div class="card text-bg-light mt-3" style="width: 100%">
-        <div class="card-header">Welcome to Sotoon</div>
+        <div class="card-header">Edit Salaries</div>
         <div class="card-body">
           <div class="alert alert-info" role="alert">
             this salary for : <b>"{{employee.email}}"</b>
           </div>
 
-          <a href="/dashboard/" class="btn btn-info">Back</a>
+          <a href="/dashboard/" class="btn btn-outline-info">Back</a>
           <a
             href="/dashboard/payroll-employee-add-salary/{{uuid}}/"
-            class="btn btn-info"
+            class="btn btn-outline-info"
             >Add New Salary</a
           >
+          {% if salaries %}
           <div class="table-responsive">
             <table class="table table-success table-striped mt-3">
               <thead>
@@ -72,21 +73,28 @@
                 </tr>
               </thead>
               <tbody>
-                {% for salary in salaries %}
+                 {% for salary in salaries %}
                 <tr>
                   <td>{{ salary.amount }}</td>
                   <td>
                     <a
                       href="/employee/edit-salary/{{employee.uuid}}/{{salary.id}}"
-                      class="btn btn-info"
+                      class="btn btn-outline-info"
                       >Edit / Delete</a
                     >
                   </td>
                 </tr>
-                {% endfor %}
+                {% endfor %} 
               </tbody>
             </table>
           </div>
+          {%else%} 
+                <div class="alert alert-info mt-3" role="alert">
+                  there is no Salaries for Show </br>
+                  Please Try <b>Add New Salary</b>
+                
+                </div>
+                {%endif%}
         </div>
       </div>
     </div>

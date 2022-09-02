@@ -56,11 +56,11 @@
           <a href="/employees/apply-form/{{uuid}}">{{ uuid }}</a>
           <form action="/dashboard/hr-register-employee/" method="post">
             {%csrf_token%} {% load bootstrap %} {{ form|bootstrap }}
-            <button type="submit" class="btn btn-primary mt-3">
+            <button type="submit" class="btn btn-outline-primary mt-3">
               Register Employee
             </button>
           </form>
-          <a href="/dashboard/" class="btn btn-primary mt-3">
+          <a href="/dashboard/" class="btn btn-outline-primary mt-3">
             Back to Dashboard
           </a>
           {%if error%}

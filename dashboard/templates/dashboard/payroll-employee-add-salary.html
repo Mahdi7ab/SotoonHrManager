@@ -59,11 +59,11 @@
           >
             <input type="hidden" name="uuid" value="{{uuid}}" />
             {%csrf_token%} {% load bootstrap %} {{ form|bootstrap }}
-            <button type="submit" class="btn btn-primary mt-3">
+            <button type="submit" class="btn btn-outline-primary mt-3">
               Add Salary
             </button>
           </form>
-          <a href="/dashboard/" class="btn btn-primary mt-3">
+          <a href="/dashboard/" class="btn btn-outline-primary mt-3">
             Back to Dashboard
           </a>
           {%if error%}

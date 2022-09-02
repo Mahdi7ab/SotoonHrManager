@@ -4,29 +4,58 @@ Sotoon Human Resource Manager
 
 # Create Virtual Envioroment
 
-python3 -m venv .venv
-.venv\scripts\active
+py -3 -m venv .venv
+.venv\Scripts\activate
+pip install -r .\requirements.txt
 
 # Run
 
 python manage.py runserver
 
+# RESTful Api (django restframeword)
+
+## url
+
+http://127.0.0.1:8000/employee_api
+
 # Migrate Group and initial Users
 
-Functions in => dashboard\migrate.py \\n
-Run Once in => hr_manager\urls.py
+## Functions
 
-# superuser
+dashboard\migrate.py \\n
+
+## Run Once
+
+hr_manager\urls.py
+
+# Users
+
+## superuser (admin)
+
+### username
 
 mahdi7ab
+
+### password
+
 P@ss23??
 
-# HrManager
+## HrManager
+
+### username
 
 HrManager
+
+### password
+
 P@ss23??
 
-# PayrollManager
+## PayrollManager
+
+### username
 
 PayrollManager
+
+### password
+
 P@ss23??
