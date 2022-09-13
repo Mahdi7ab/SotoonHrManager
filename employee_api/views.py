@@ -1,5 +1,8 @@
+from asyncio.windows_events import NULL
 from uuid import uuid4
 from django.contrib.auth.models import User
+from django.db import IntegrityError
+from dashboard.views import hr_register_employee_function
 from employees.models import Employee
 from .serializers import EmployeeSerializer
 from rest_framework.views import APIView
@@ -24,17 +27,8 @@ class EmployeeListApiView(APIView):
         '''
         Create the Employee
         '''
-        email = request.data.get('email')
-        data = {
-            'email': email,
-        }
-        serializer = EmployeeSerializer(data=data)
-        if serializer.is_valid():
-            username = email.split('@', 1)[0]
-            user = User.objects.create(
-                username=username, email=email)
-            uuid = uuid4()
-            Employee.objects.create(email=email, user=user, uuid=uuid)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        res = hr_register_employee_function(email)
+        if res == "duplicate user":
+            return Response("Username is not Unique", status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response(res, status=status.HTTP_201_CREATED)

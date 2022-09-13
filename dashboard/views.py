@@ -20,7 +20,7 @@ def login_page(request):  # login form
                 login(request, user)
                 return HttpResponseRedirect("/dashboard/", {'user': user})
             else:
-                return render(request, "dashboard/login.html", {'error': 'user is not exist'})
+                return render(request, "dashboard/login.html", {'form': form, 'error': 'user is not exist'})
     else:
         # check if loged in redirect to dashboard
         if request.user.is_authenticated:
@@ -36,32 +36,46 @@ def logout_page(request):
 
 # Dashboard home page
 def dashboard_page(request):
-    user = request.user
-    username = user.email.split('@', 1)[0]
-    context = {'user': user}
-    group = user.groups.first()
-    context['group'] = str(group)
-    if str(group) == 'HrManagers':
-        context['employees'] = Employee.objects.all()
-    elif str(group) == 'PayrollManagers':
-        context['employees'] = Employee.objects.all()
+    if request.user.is_authenticated:
+        user = request.user
+        username = user.username
+        context = {'user': user}
+        group = user.groups.first()
+        context['group'] = str(group)
+        if str(group) == 'HrManagers':
+            context['employees'] = Employee.objects.all()
+        elif str(group) == 'PayrollManagers':
+            context['employees'] = Employee.objects.all()
+        else:
+            try:
+                context['employee'] = Employee.objects.get(username=username)
+            except:
+                return logout_page(request)
+        return render(request, "dashboard/dashboard.html", context=context)
     else:
-        context['employee'] = Employee.objects.get(username=username)
-    return render(request, "dashboard/dashboard.html", context=context)
+        return HttpResponseRedirect("/login/")
 
 
 # HR Manager - Register Employee
-def hr_register_employee(email):
+def hr_register_employee_function(email):
     username = email.split('@', 1)[0]
-    form = RegisterEmployeeForm()
     user, created = User.objects.get_or_create(username=username, email=email)
     if created:
         uuid = uuid4()
         # register employee
         Employee.objects.create(email=email, user=user, uuid=uuid)
-        return render(None, "dashboard/hr-register-employee.html", {'form': form, 'uuid': uuid})
+        return uuid
     else:
+        return "duplicate user"
+
+
+def hr_register_employee(email):
+    form = RegisterEmployeeForm()
+    res = hr_register_employee_function(email)
+    if res == "duplicate user":
         return render(None, "dashboard/hr-register-employee.html", {'form': form, 'error': "duplicate user"})
+    else:
+        return render(None, "dashboard/hr-register-employee.html", {'form': form, 'uuid': res})
 
 
 def hr_register_employee_page(request):

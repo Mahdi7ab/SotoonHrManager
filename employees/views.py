@@ -14,12 +14,15 @@ def employee_apply_page(request, uuid):
         if form.is_valid():
             email = request.POST.get('email')
             password = form.cleaned_data.get('password')
+            username = form.cleaned_data.get('username')
             # update employee
             Employee.objects.update(**form.cleaned_data)
             # update user and set password
-            username = str(email).split('@', 1)[0]
-            user = User.objects.get(username=username)
+            usernameFromEmail = str(email).split('@', 1)[0]
+            user = User.objects.get(username=usernameFromEmail)
             user.set_password(password)
+            # update username
+            user.username = username
             user.save()
             return HttpResponseRedirect("/dashboard/")
     else:
@@ -30,7 +33,7 @@ def employee_apply_page(request, uuid):
         context['email'] = email
         context['uuid'] = uuid
         # check if register ...
-        if employee.username != '':
+        if employee.name != '':
             context['is_registered'] = True
     return render(request, "employees/apply-form.html", context=context)
 
